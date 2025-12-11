@@ -67,7 +67,8 @@ http://localhost:3000
 📸 Screenshots
 
 
-![Dashboard](./screenshots/dashboard.png)
+![hero](./screenshots/hero.png)
+![userdashboard](./screenshots/Userdashboard.png)
 ![Interview](./screenshots/interview.png)
 
 📜 License
