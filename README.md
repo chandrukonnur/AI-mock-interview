@@ -66,7 +66,6 @@ http://localhost:3000
 
 📸 Screenshots
 
-(Add your project screenshots here)
 
 ![Dashboard](./screenshots/dashboard.png)
 ![Interview](./screenshots/interview.png)
