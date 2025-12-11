@@ -1,0 +1,383 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap');
+
+
+/* ------------------------------
+   THEME VARIABLES (your original)
+---------------------------------*/
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* ROOT + DARK MODE COLORS (unchanged) */
+:root {
+  --radius: 0.625rem;
+  --background: #0d0d0d; /* FORCE DARK BG */
+  --foreground: #ffffff;
+
+  --card: #111;
+  --card-foreground: #fff;
+
+  --popover: #111;
+  --popover-foreground: #fff;
+
+  --primary: #6d4aff;
+  --primary-foreground: #fff;
+
+  --secondary: #1a1a1a;
+  --secondary-foreground: #fff;
+
+  --muted: #1a1a1a;
+  --muted-foreground: #bbbbbb;
+
+  --accent: #1a1a1a;
+  --accent-foreground: #fff;
+
+  --destructive: #ff4949;
+
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.15);
+
+  --ring: rgba(255, 255, 255, 0.2);
+}
+
+.dark {
+  --background: #0d0d0d;
+}
+
+/* ------------------------------
+   BASE LAYER
+---------------------------------*/
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* ------------------------------
+   GRID BACKGROUND (for Hero + Layout)
+---------------------------------*/
+.bg-grid-pattern {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    );
+  background-size: 40px 40px;
+}
+
+/* ------------------------------
+   GLASS EFFECT CARDS
+---------------------------------*/
+.glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  border-radius: 14px;
+}
+
+/* ------------------------------
+   Section Wrapper Utility
+---------------------------------*/
+.section {
+  @apply w-full max-w-6xl mx-auto py-20 px-4;
+}
+
+/* ------------------------------
+   Text Gradients
+---------------------------------*/
+.text-gradient {
+  background: linear-gradient(to bottom, #fff, #9ca3af);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ------------------------------
+   Fade-in Animation
+---------------------------------*/
+.fade-in {
+  opacity: 0;
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Full-page grid background */
+body {
+  background: #000 url("/grid.svg") repeat;
+  background-size: 1400px;
+  color: white;
+}
+
+/* Glass + blur navbar */
+.nav-blur {
+  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Smooth fade animation for all sections */
+.section {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Glass cards */
+.glass-card {
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+
+/* Full-page grid background */
+body {
+  background: #030303 url("/grid.svg") repeat;
+  background-size: 1600px;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Overlay gradient over grid */
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Glass morphism */
+.glass-card {
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Smooth fade + slide */
+.section {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeUp 0.9s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animated gradient text */
+.gradient-text {
+  background: linear-gradient(90deg, #ffffff, #8888ff, #ffffff);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientFlow 6s ease infinite;
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0%;
+  }
+  50% {
+    background-position: 150%;
+  }
+  100% {
+    background-position: 0%;
+  }
+}
+
+/* Soft glow behind elements */
+.glow {
+  box-shadow: 0 0 150px rgba(150, 150, 255, 0.15);
+}
+
+/* Blur navbar */
+.nav-blur {
+  backdrop-filter: blur(22px);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* Elegant FAQ animation */
+details[open] summary {
+  color: #fff;
+}
+details summary::marker {
+  color: #999;
+}
+details summary:hover {
+  color: #ccc;
+}.animate-grid {
+  background-image: url('/grid.svg');
+  background-size: 30px 30px;
+  animation: grid-move 15s linear infinite;
+}
+
+@keyframes grid-move {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100px 100px;
+  }
+}
+/* PAGE BACKGROUND */
+body {
+  background: radial-gradient(circle at bottom, #3c0d99, #0a0a0a 60%);
+  color: white;
+}
+
+/* GRID OVERLAY */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("/grid.svg");
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: -1;
+}
+.hero-tilt {
+  will-change: transform;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease-out;
+}
+html, body {
+  overflow-x: hidden;
+}
+html, body {
+  scroll-behavior: smooth;
+}
+html {
+  scroll-behavior: smooth;
+}
+@layer utilities {
+  .gradient-text {
+    background: linear-gradient(90deg, #c084fc 0%, #818cf8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+.gradient-split {
+  background: linear-gradient(
+    to right,
+    #ffffff 0%,
+    #ffffff 45%,
+    #c084fc 55%,
+    #818cf8 100%
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.futuristic-heading {
+  font-family: 'Orbitron', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  letter-spacing: 0.08em;
+  background: linear-gradient(90deg, #FFFFFF 0%, #CBB3FF 25%, #7C3AED 55%, #4F46E5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  display: inline-block;
+}
+
+.futuristic-heading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  z-index: -1;
+  filter: blur(10px);
+  opacity: 0.14;
+  background: linear-gradient(180deg, rgba(124,58,237,0.18), rgba(79,70,229,0.08));
+  transform: translateY(6px) scale(1.06);
+}
+
+.futuristic-heading::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 55%;
+  bottom: -8px;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(124,58,237,0.5), rgba(99,102,241,0.2));
+  filter: blur(6px);
+  opacity: 0.85;
+}
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&display=swap');
+.navbar-font {
+  font-family: 'Orbitron', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
