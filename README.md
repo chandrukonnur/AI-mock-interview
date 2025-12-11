@@ -23,11 +23,6 @@ It helps users practice, improve confidence, and track progress — all through 
 - AI analyzes resume before interview  
 - Helps with job and interview preparation  
 
-### 🗂️ Added Extra Pages
-- About  
-- Pricing  
-- Contact  
-
 ### 🧠 AI Avatar (NOT Removed)
 - Avatar streaming retained  
 - Realistic face & voice interview experience  
@@ -101,5 +96,4 @@ If you want, I can also create:
 
 Just tell me!
 
-## 📁 Project Structure
 
