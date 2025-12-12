@@ -1,0 +1,230 @@
+{
+  "name": "AI_Mock_Interview",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "Ai_generated_interview_questions",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [-96, -16],
+      "id": "webhook-node",
+      "name": "Webhook",
+      "webhookId": "{{WEBHOOK_ID}}"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.body.resumeUrl }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [560, -160],
+      "id": "http-request-node",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [832, -160],
+      "id": "extract-file-node",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Based on the user’s resume text, generate 10 interview questions and answers. Return result strictly in JSON: { \"questions\": [ { \"question\": \"string\", \"answer\": \"string\" } ] }"
+            },
+            {
+              "type": "HumanMessagePromptTemplate",
+              "message": "={{ $json.text }}"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [1088, -160],
+      "id": "resume-chain",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "model": "meta-llama/llama-3.3-70b-instruct:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [1056, 16],
+      "id": "openrouter-model",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "{{OPENROUTER_CREDENTIAL_ID}}",
+          "name": "{{OPENROUTER_CREDENTIAL_NAME}}"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{ \"questions\": [ { \"question\": \"string\", \"answer\": \"string\" } ] }"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [1280, 16],
+      "id": "resume-parser",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [1440, -160],
+      "id": "resume-response",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.body.resumeUrl }}",
+              "rightValue": "",
+              "operator": { "type": "string", "operation": "exists", "singleValue": true }
+            },
+            {
+              "leftValue": "",
+              "rightValue": "",
+              "operator": { "type": "string", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [192, -16],
+      "id": "if-node",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "model": "meta-llama/llama-3.3-70b-instruct:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [464, 336],
+      "id": "openrouter-job-model",
+      "name": "OpenRouter Chat Model1",
+      "credentials": {
+        "openRouterApi": {
+          "id": "{{OPENROUTER_CREDENTIAL_ID}}",
+          "name": "{{OPENROUTER_CREDENTIAL_NAME}}"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.Jobtitle }}{{ $json.body.JobDescription }}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Using job title & description, create 10 interview questions (easy/medium/hard) with answers."
+            },
+            {
+              "type": "HumanMessagePromptTemplate",
+              "message": "={{ $json.body.Jobtitle }}{{ $json.body.JobDescription }}"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [528, 144],
+      "id": "job-chain",
+      "name": "Basic LLM Chain1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [928, 176],
+      "id": "job-response",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{ \"questions\": [ { \"question\": \"string\", \"answer\": \"string\" } ] }"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [672, 352],
+      "id": "job-parser",
+      "name": "Structured Output Parser1"
+    }
+  ],
+
+  "connections": {
+    "Webhook": { "main": [[{ "node": "If", "type": "main", "index": 0 }]] },
+    "HTTP Request": { "main": [[{ "node": "Extract from File", "type": "main", "index": 0 }]] },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [[{ "node": "Basic LLM Chain", "type": "ai_languageModel", "index": 0 }]]
+    },
+    "Extract from File": { "main": [[{ "node": "Basic LLM Chain", "type": "main", "index": 0 }]] },
+    "Structured Output Parser": {
+      "ai_outputParser": [[{ "node": "Basic LLM Chain", "type": "ai_outputParser", "index": 0 }]]
+    },
+    "Basic LLM Chain": { "main": [[{ "node": "Respond to Webhook", "type": "main", "index": 0 }]] },
+    "If": {
+      "main": [
+        [{ "node": "HTTP Request", "type": "main", "index": 0 }],
+        [{ "node": "Basic LLM Chain1", "type": "main", "index": 0 }]
+      ]
+    },
+    "OpenRouter Chat Model1": {
+      "ai_languageModel": [[{ "node": "Basic LLM Chain1", "type": "ai_languageModel", "index": 0 }]]
+    },
+    "Basic LLM Chain1": { "main": [[{ "node": "Respond to Webhook1", "type": "main", "index": 0 }]] },
+    "Structured Output Parser1": {
+      "ai_outputParser": [[{ "node": "Basic LLM Chain1", "type": "ai_outputParser", "index": 0 }]]
+    }
+  },
+
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "{{VERSION_ID}}",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "{{INSTANCE_ID}}"
+  },
+  "id": "{{WORKFLOW_ID}}",
+  "tags": []
+}
