@@ -6,7 +6,6 @@ It helps users practice interviews, improve confidence, and track progress — a
 ---
 
 ## 🌟 Features
-
 ### 🤖 AI Mock Interview System
 - Real-time interview simulation  
 - Dynamic AI-generated questions  
