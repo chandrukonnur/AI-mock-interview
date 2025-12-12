@@ -125,14 +125,12 @@ http://localhost:3000
 ---
 
 # 📸 Screenshots
-```
 ![hero](./screenshots/hero.png)
 ![userdashboard](./screenshots/Userdashboard.png)
 ![Interview](./screenshots/interview.png)
 ![question](./screenshots/questiongenrator.png)
 ![feedback](./screenshots/feedback.png)
 
-```
 ---
 # 📡 n8n Workflow Setup
 ```
@@ -214,14 +212,9 @@ NEXT_PUBLIC_AKOOL_API_KEY=your_akool_api_key
 NEXT_PUBLIC_AKOOL_AVATAR_ID=your_avatar_id
 ```
 ---
-```
 📜 License
-
 This project is for portfolio and educational purposes.
-```
 ---
 ⭐ Contribute
-```
 If you like this project, please ⭐ star the repo — it helps a lot!
-```
 ----
