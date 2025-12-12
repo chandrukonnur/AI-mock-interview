@@ -1,78 +1,74 @@
-🚀 AI Mock Interview
+# 🚀 AI Mock Interview
 
-AI Mock Interview is a full-featured web application that simulates real technical interviews using AI-driven avatars, resume analysis, and automated feedback generation.
+AI Mock Interview is a full-featured web application that simulates real technical interviews using **AI-driven avatars, resume analysis, and automated feedback generation**.  
 It helps users practice interviews, improve confidence, and track progress — all inside a beautifully redesigned UI.
 
-🌟 Features
-🤖 AI Mock Interview System
+---
 
-Real-time interview simulation
+## 🌟 Features
 
-Dynamic AI-generated questions
+### 🤖 AI Mock Interview System
+- Real-time interview simulation  
+- Dynamic AI-generated questions  
+- Automated scoring & feedback  
+- Scenario-based interview sessions  
 
-Automated scoring & feedback
+### 🎨 Fully Redesigned UI (Custom Version)
+- Modern landing page  
+- New dashboard, navbar, and footer  
+- Smooth animations and transitions  
+- Fully responsive for all devices  
 
-Scenario-based interview sessions
+### 📄 Resume Preview & Analysis
+- Upload and view resume directly in the app  
+- AI analyzes resume before generating questions  
+- Helps prepare for real job interviews  
 
-🎨 Fully Redesigned UI (Custom Version)
+### 🧠 AI Avatar (Akool Streaming Avatar)
+- Realistic face & voice interaction  
+- Natural conversational experience  
+- Users feel like talking to a real interviewer  
 
-Modern landing page
+### 📡 n8n Automation Workflows
+- **Workflow 1:** AI Question Generator  
+- **Workflow 2:** Interview Feedback Generator  
+- Both use LLMs to generate structured outputs  
 
-New dashboard, navbar, and footer
+---
 
-Smooth animations and transitions
+## 🛠️ Tech Stack
 
-Fully responsive for all devices
+| Category | Technology |
+|----------|------------|
+| Frontend | Next.js, React, Tailwind CSS |
+| Backend | Convex |
+| Authentication | Clerk |
+| Automation | n8n |
+| AI Services | OpenRouter (LLMs), Akool Avatar |
+| Styling | Tailwind + Custom Animations |
 
-📄 Resume Preview & Analysis
+---
 
-Upload and view resume directly in the app
+## ⚙️ Installation
 
-AI analyzes resume before generating questions
-
-Helps prepare for real job interviews
-
-🧠 AI Avatar (Akool Streaming Avatar)
-
-Realistic face & voice interaction
-
-Natural conversational experience
-
-Users feel like talking to a real interviewer
-
-📡 n8n Automation Workflows
-
-Workflow 1 → AI Question Generator
-
-Workflow 2 → Interview Feedback Generator
-
-Both use LLMs to generate structured outputs
-
-🛠️ Tech Stack
-Category	Technology
-Frontend	Next.js, React, Tailwind CSS
-Backend	Convex
-Authentication	Clerk
-Automation	n8n
-AI Services	OpenRouter (LLMs), Akool Avatar
-Styling	Tailwind + Custom Animations
-⚙️ Installation
-1️⃣ Clone the repository
+### 1️⃣ Clone the repository
+```bash
 git clone https://github.com/your-username/ai-mock-interview.git
 cd ai-mock-interview
-
 2️⃣ Install dependencies
+bash
+Copy code
 npm install
-
 🔐 3️⃣ Add Environment Variables
-
 Create a file named:
 
+lua
+Copy code
 .env.local
-
-
 Add the following:
 
+env
+Copy code
 # Clerk Authentication
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
@@ -91,28 +87,27 @@ NEXT_PUBLIC_AKOOL_AVATAR_ID=
 # n8n Webhooks
 NEXT_PUBLIC_N8N_QUESTION_WEBHOOK=
 NEXT_PUBLIC_N8N_FEEDBACK_WEBHOOK=
-
-
-⚠️ Never commit the .env.local file to GitHub.
+⚠️ Never commit .env.local to GitHub.
 
 ▶️ 4️⃣ Run the Development Server
+bash
+Copy code
 npm run dev
-
-
 App will run at:
 
+arduino
+Copy code
 http://localhost:3000
-
 📸 Screenshots
 
 ![hero](./screenshots/hero.png)
 ![userdashboard](./screenshots/Userdashboard.png)
 ![Interview](./screenshots/interview.png)
 ![question](./screenshots/questiongenrator.png)
-![feedback](./screenshots/feedback.png)
+ ![feedback](./screenshots/feedback.png)
+
 
 📡 n8n Workflow Setup
-
 This project uses two n8n workflows:
 
 Interview Question Generator
@@ -120,7 +115,6 @@ Interview Question Generator
 Interview Feedback Generator
 
 🔧 1. Import Workflow JSON into n8n
-
 Open n8n Dashboard
 
 Go to Workflows → Import from File
@@ -131,22 +125,23 @@ Click Import
 
 🔐 2. Configure Required Credentials
 🔹 OpenRouter API
+Go to:
 
-Go to Credentials → Add Credential → OpenRouter
+Credentials → Add Credential → OpenRouter
 
+Add:
+
+env
+Copy code
 OPENROUTER_API_KEY=your_openrouter_key
-
-
 Choose this credential inside the LLM nodes.
 
 🔁 3. Replace Webhook URLs
-
 Your workflow contains placeholders:
 
+Copy code
 {{WEBHOOK_PATH}}
 {{WEBHOOK_ID}}
-
-
 After importing:
 
 Click the Webhook Node
@@ -155,43 +150,34 @@ Click Webhook URLs
 
 Copy the Production URL
 
-Paste into your .env.local
+Paste into .env.local
 
 Example:
 
+env
+Copy code
 NEXT_PUBLIC_N8N_QUESTION_WEBHOOK=https://your-domain.com/webhook/abc123
 NEXT_PUBLIC_N8N_FEEDBACK_WEBHOOK=https://your-domain.com/webhook/xyz987
-
 🧠 Akool Avatar Setup
-
 This project uses Akool Streaming Avatar for real-time interview simulation.
 
 Step 1 — Create an Akool Account
-
 https://akool.com
 
 Step 2 — Generate Your API Key
-
 Dashboard → Developers → API Keys
 
 Step 3 — Add to .env.local
+env
+Copy code
 NEXT_PUBLIC_AKOOL_API_KEY=your_akool_api_key
 NEXT_PUBLIC_AKOOL_AVATAR_ID=your_avatar_id
-
 Step 4 — Replace Avatar in Code
-
-Where avatar is initialized:
-
+js
+Copy code
 const avatar = new AkoolAvatar({
   apiKey: process.env.NEXT_PUBLIC_AKOOL_API_KEY,
   avatarId: process.env.NEXT_PUBLIC_AKOOL_AVATAR_ID,
 });
-
 📜 License
-
 This project is for portfolio and educational purposes.
-
-⭐ Contribute
-
-If you like this project, please ⭐ star the repo on GitHub — it helps a lot!
-
