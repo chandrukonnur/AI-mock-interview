@@ -84,16 +84,3 @@ AI & Cloud Enthusiast | Next.js Developer
 
 If you like this project, give it a star ⭐ on GitHub!
 
-
----
-
-If you want, I can also create:
-
-✅ Badges (Next.js, React, Tailwind)  
-✅ Better screenshot layout  
-✅ A deployment section for Vercel  
-✅ A professional project description for LinkedIn  
-
-Just tell me!
-
-
