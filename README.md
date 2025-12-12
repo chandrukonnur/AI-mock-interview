@@ -51,70 +51,100 @@ It helps users practice interviews, improve confidence, and track progress — a
 
 ## ⚙️ Installation
 
-### 1️⃣ Clone the repository
+# 1️⃣ Clone the repository
+
 ```bash
 git clone https://github.com/your-username/ai-mock-interview.git
 cd ai-mock-interview
-2️⃣ Install dependencies
-bash
-Copy code
+```
+
+---
+
+# 2️⃣ Install dependencies
+
+```bash
 npm install
-🔐 3️⃣ Add Environment Variables
+```
+
+---
+
+# 3️⃣ Add Environment Variables
+
 Create a file named:
 
-lua
-Copy code
+```
 .env.local
-Add the following:
+```
 
-env
-Copy code
-# Clerk Authentication
+Add:
+
+```env
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
-
-# Convex Backend
+```
+---
+## Clerk Authentication
+```
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+```
+---
+## Convex Backend
+```
 CONVEX_DEPLOYMENT=
 CONVEX_URL=
-
-# OpenRouter API (for LLM)
+```
+---
+## OpenRouter API (for LLM)
+```
 OPENROUTER_API_KEY=
-
-# Akool Avatar API
+```
+---
+## Akool Avatar API
+```
 NEXT_PUBLIC_AKOOL_API_KEY=
 NEXT_PUBLIC_AKOOL_AVATAR_ID=
-
-# n8n Webhooks
+```
+---
+## n8n Webhooks
+```
 NEXT_PUBLIC_N8N_QUESTION_WEBHOOK=
 NEXT_PUBLIC_N8N_FEEDBACK_WEBHOOK=
-⚠️ Never commit .env.local to GitHub.
+```
+---
 
-▶️ 4️⃣ Run the Development Server
-bash
-Copy code
+# 4️⃣ Run the Development Server
+```
 npm run dev
+```
+---
 App will run at:
-
-arduino
-Copy code
+```
 http://localhost:3000
-📸 Screenshots
+```
+---
 
+# 📸 Screenshots
+```
 ![hero](./screenshots/hero.png)
 ![userdashboard](./screenshots/Userdashboard.png)
 ![Interview](./screenshots/interview.png)
 ![question](./screenshots/questiongenrator.png)
- ![feedback](./screenshots/feedback.png)
+![feedback](./screenshots/feedback.png)
 
+```
+---
+# 📡 n8n Workflow Setup
+```
 
-📡 n8n Workflow Setup
 This project uses two n8n workflows:
 
-Interview Question Generator
-
-Interview Feedback Generator
-
-🔧 1. Import Workflow JSON into n8n
+ ->Interview Question Generator
+ ->Interview Feedback Generator
+```
+---
+### 🔧 1. Import Workflow JSON into n8n
+```
 Open n8n Dashboard
 
 Go to Workflows → Import from File
@@ -122,28 +152,29 @@ Go to Workflows → Import from File
 Upload the provided workflow JSON
 
 Click Import
-
-🔐 2. Configure Required Credentials
+```
+---
+### 🔐 2. Configure Required Credentials
+```
 🔹 OpenRouter API
 Go to:
-
 Credentials → Add Credential → OpenRouter
 
 Add:
-
-env
-Copy code
 OPENROUTER_API_KEY=your_openrouter_key
 Choose this credential inside the LLM nodes.
-
-🔁 3. Replace Webhook URLs
+```
+---
+### 🔁 3. Replace Webhook URLs
+```
 Your workflow contains placeholders:
 
-Copy code
 {{WEBHOOK_PATH}}
 {{WEBHOOK_ID}}
-After importing:
-
+```
+---
+### After importing:
+```
 Click the Webhook Node
 
 Click Webhook URLs
@@ -151,33 +182,46 @@ Click Webhook URLs
 Copy the Production URL
 
 Paste into .env.local
-
-Example:
-
+```
+---
+### Example:
+```
 env
-Copy code
 NEXT_PUBLIC_N8N_QUESTION_WEBHOOK=https://your-domain.com/webhook/abc123
 NEXT_PUBLIC_N8N_FEEDBACK_WEBHOOK=https://your-domain.com/webhook/xyz987
-🧠 Akool Avatar Setup
+```
+---
+# 🧠 Akool Avatar Setup
+```
 This project uses Akool Streaming Avatar for real-time interview simulation.
-
-Step 1 — Create an Akool Account
+```
+---
+### Step 1 — Create an Akool Account
+```
 https://akool.com
-
-Step 2 — Generate Your API Key
+```
+---
+### Step 2 — Generate Your API Key
+```
 Dashboard → Developers → API Keys
-
-Step 3 — Add to .env.local
+```
+---
+### Step 3 — Add to .env.local
+```
 env
-Copy code
+
 NEXT_PUBLIC_AKOOL_API_KEY=your_akool_api_key
 NEXT_PUBLIC_AKOOL_AVATAR_ID=your_avatar_id
-Step 4 — Replace Avatar in Code
-js
-Copy code
-const avatar = new AkoolAvatar({
-  apiKey: process.env.NEXT_PUBLIC_AKOOL_API_KEY,
-  avatarId: process.env.NEXT_PUBLIC_AKOOL_AVATAR_ID,
-});
+```
+---
+```
 📜 License
+
 This project is for portfolio and educational purposes.
+```
+---
+⭐ Contribute
+```
+If you like this project, please ⭐ star the repo — it helps a lot!
+```
+----
