@@ -1,0 +1,10 @@
+torch
+transformers
+accelerate
+peft
+bitsandbytes
+fastapi
+uvicorn
+sentence-transformers
+numpy
+pydantic
